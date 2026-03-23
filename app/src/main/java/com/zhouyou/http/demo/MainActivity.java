@@ -23,6 +23,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -34,6 +35,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.zhouyou.http.EasyHttp;
+import com.zhouyou.http.cache.model.CacheMode;
 import com.zhouyou.http.callback.CallBack;
 import com.zhouyou.http.callback.CallClazzProxy;
 import com.zhouyou.http.callback.ProgressDialogCallBack;
@@ -48,8 +50,11 @@ import com.zhouyou.http.demo.model.SectionItem;
 import com.zhouyou.http.demo.model.SkinTestResult;
 import com.zhouyou.http.demo.utils.FileUtils;
 import com.zhouyou.http.demo.utils.MD5;
+import com.zhouyou.http.demo.utils.SystemInfoUtils;
 import com.zhouyou.http.exception.ApiException;
 import com.zhouyou.http.model.ApiResult;
+import com.zhouyou.http.model.HttpHeaders;
+import com.zhouyou.http.model.HttpParams;
 import com.zhouyou.http.request.CustomRequest;
 import com.zhouyou.http.subsciber.BaseSubscriber;
 import com.zhouyou.http.subsciber.IProgressDialog;
@@ -122,6 +127,7 @@ public class MainActivity extends AppCompatActivity {
                 .readTimeOut(30 * 1000)//局部定义读超时 ,可以不用定义
                 .writeTimeOut(30 * 1000)
                 .connectTimeout(30 * 1000)
+                .cacheMode(CacheMode.NO_CACHE)
                 //.headers("","")//设置头参数
                 //.params("name","张三")//设置参数
                 //.addInterceptor()
@@ -156,21 +162,55 @@ public class MainActivity extends AppCompatActivity {
      * post请求
      */
     public void onPost(View view) {
-        EasyHttp.post("v1/app/chairdressing/news/favorite")
-                .params("newsId", "552")
-                .accessToken(true)
-                .timeStamp(true)
+
+        EasyHttp.get("users/octocat")
+                .readTimeOut(30 * 1000)//局部定义读超时
+                .writeTimeOut(30 * 1000)
+                .connectTimeout(30 * 1000)
+                .cacheMode(CacheMode.NO_CACHE)
+                //.cacheKey(this.getClass().getSimpleName()+"11")
+                //.cacheMode(CacheMode.CACHEANDREMOTE)
+                //.cacheMode(CacheMode.ONLYREMOTE)
+                //.headers("","")//设置头参数
+                //.params("name","张三")//设置参数
+                //.addInterceptor()
+                .addConverterFactory(GsonConverterFactory.create())
+
+                //.addCookie()
+                //.timeStamp(true)
+
                 .execute(new SimpleCallBack<String>() {
                     @Override
                     public void onError(ApiException e) {
-                        showToast(e.getMessage());
+                        Log.i("onError","ababababa");
+                        //请求错误
                     }
 
                     @Override
                     public void onSuccess(String response) {
-                        showToast(response);
+                        //请求成功
                     }
                 });
+
+
+//
+//
+//        EasyHttp.post("v1/app/chairdressing/news/favorite")
+//                .params("newsId", "552")
+//                .accessToken(true)
+//                .timeStamp(true)
+//                .execute(new SimpleCallBack<String>() {
+//                    @Override
+//                    public void onError(ApiException e) {
+//
+//                        showToast(e.getMessage());
+//                    }
+//
+//                    @Override
+//                    public void onSuccess(String response) {
+//                        showToast(response);
+//                    }
+//                });
     }
 
     /**

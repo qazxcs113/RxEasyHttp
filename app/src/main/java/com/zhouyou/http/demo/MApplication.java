@@ -19,6 +19,7 @@ package com.zhouyou.http.demo;
 import android.app.Application;
 import android.content.Context;
 
+import com.google.gson.Gson;
 import com.zhouyou.http.EasyHttp;
 import com.zhouyou.http.cache.converter.SerializableDiskConverter;
 import com.zhouyou.http.demo.constant.AppConstant;
@@ -31,6 +32,8 @@ import com.zhouyou.http.utils.HttpLog;
 import javax.net.ssl.HostnameVerifier;
 import javax.net.ssl.SSLSession;
 
+import retrofit2.converter.gson.GsonConverterFactory;
+
 
 public class MApplication extends Application {
     private static Application app = null;
@@ -42,7 +45,7 @@ public class MApplication extends Application {
         EasyHttp.init(this);
 
         //这里涉及到安全我把url去掉了，demo都是调试通的
-        String Url = "http://www.xxx.com";
+        String Url = "https://api.github.com";
 
         //设置请求头
         HttpHeaders headers = new HttpHeaders();
@@ -63,8 +66,9 @@ public class MApplication extends Application {
                 .setCacheMaxSize(50 * 1024 * 1024)//设置缓存大小为50M
                 .setCacheVersion(1)//缓存版本为1
                 .setHostnameVerifier(new UnSafeHostnameVerifier(Url))//全局访问规则
+
                 .setCertificates()//信任所有证书
-                //.addConverterFactory(GsonConverterFactory.create(gson))//本框架没有采用Retrofit的Gson转化，所以不用配置
+                .addConverterFactory(GsonConverterFactory.create(new Gson()))//本框架没有采用Retrofit的Gson转化，所以不用配置
                 .addCommonHeaders(headers)//设置全局公共头
                 .addCommonParams(params)//设置全局公共参数
                 .addInterceptor(new CustomSignInterceptor());//添加参数签名拦截器
