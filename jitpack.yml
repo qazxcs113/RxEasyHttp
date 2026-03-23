@@ -1,0 +1,5 @@
+jdk:
+  - openjdk17
+install:
+  # 强制 JitPack 只执行 library 模块的发布任务，跳过 app 模块
+  - ./gradlew :rxeasyhttp:publishToMavenLocal -x :app:assembleRelease
