@@ -17,7 +17,7 @@
 package com.zhouyou.http.demo;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.text.Html;
 import android.view.View;
 import android.widget.TextView;
@@ -67,32 +67,7 @@ public class CacheActivity extends AppCompatActivity implements View.OnClickList
     @Override
     public void onClick(View v) {
         cacheMode = CacheMode.FIRSTREMOTE;
-        switch (v.getId()) {
-            case R.id.default_cache: /** 默认缓存，走的是okhttp cache*/
-                cacheMode = CacheMode.DEFAULT;
-                break;
-            case R.id.first_remote: /** 先请求网络，请求网络失败后再加载缓存 （自定义缓存Rxcache）*/
-                cacheMode = CacheMode.FIRSTREMOTE;
-                break;
-            case R.id.first_cache:/** 先加载缓存，缓存没有再去请求网络 （自定义缓存Rxcache）*/
-                cacheMode = CacheMode.FIRSTCACHE;
-                break;
-            case R.id.only_remote: /** 仅加载网络，但数据依然会被缓存 （自定义缓存Rxcache）*/
-                cacheMode = CacheMode.ONLYREMOTE;
-                break;
-            case R.id.only_cache: /** 只读取缓存 （自定义缓存Rxcache）*/
-                cacheMode = CacheMode.ONLYCACHE;
-                break;
-            case R.id.cache_remote:/** 先使用缓存，不管是否存在，仍然请求网络，会回调两次（自定义缓存Rxcache）*/
-                cacheMode = CacheMode.CACHEANDREMOTE;
-                break;
-            case R.id.cache_remote_distinct:
-                /** 先使用缓存，不管是否存在，仍然请求网络，
-                 有缓存先显示缓存，等网络请求数据回来后发现和缓存是一样的就不会再返回，否则数据不一样会继续返回。
-                 （目的是为了防止数据是一致的也会刷新两次界面）（自定义缓存Rxcache）*/
-                cacheMode = CacheMode.CACHEANDREMOTEDISTINCT;
-                break;
-        }
+
         requestCahce();
     }
 

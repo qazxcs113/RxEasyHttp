@@ -3,7 +3,7 @@ package com.zhouyou.http.demo;
 import android.annotation.SuppressLint;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
@@ -22,7 +22,7 @@ public class AboutActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_about);
-        android.support.v7.app.ActionBar actionBar = getSupportActionBar();
+        androidx.appcompat.app.ActionBar actionBar = getSupportActionBar();
         if(actionBar != null){
             actionBar.setHomeButtonEnabled(true);
             actionBar.setDisplayHomeAsUpEnabled(true);
@@ -104,10 +104,7 @@ public class AboutActivity extends AppCompatActivity {
         // 设置数据库缓存路径
         webView.getSettings().setDatabasePath(cacheDirPath); // API 19 deprecated
         // 设置Application caches缓存目录
-        webView.getSettings().setAppCachePath(cacheDirPath);
-        // 开启Application Cache功能
-        webView.getSettings().setAppCacheEnabled(true);
-        webView.getSettings().setAppCacheMaxSize(1024 * 1024 * 8);
+
         //Log.i("databasepath", webView.getSettings().getDatabasePath());
 
         //其他

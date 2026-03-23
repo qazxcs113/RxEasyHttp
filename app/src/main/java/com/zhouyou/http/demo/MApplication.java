@@ -51,7 +51,7 @@ public class MApplication extends Application {
         HttpParams params = new HttpParams();
         params.put("appId", AppConstant.APPID);
         EasyHttp.getInstance()
-                .debug("RxEasyHttp", BuildConfig.DEBUG)
+                .debug("RxEasyHttp", true)
                 .setReadTimeOut(60 * 1000)
                 .setWriteTimeOut(60 * 1000)
                 .setConnectTimeout(60 * 1000)

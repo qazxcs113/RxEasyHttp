@@ -1,8 +1,7 @@
 package com.zhouyou.http.demo;
 
 import android.os.Bundle;
-import android.support.annotation.IdRes;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
@@ -46,7 +45,7 @@ public class SearchActivity extends AppCompatActivity {
     }
 
     @SuppressWarnings("unchecked")
-    protected <T extends View> T findView(@IdRes int id) {
+    protected <T extends View> T findView(int id) {
         return (T) findViewById(id);
     }
 

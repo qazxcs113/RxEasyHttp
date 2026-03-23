@@ -17,11 +17,11 @@
 package com.zhouyou.http.demo;
 
 import android.app.Dialog;
-import android.app.ProgressDialog;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.zhouyou.http.EasyHttp;
 import com.zhouyou.http.cache.model.CacheMode;
@@ -51,6 +51,7 @@ import java.util.List;
  * 日期： 2017/7/6 16:23 <br>
  * 版本： v1.0<br>
  */
+@SuppressWarnings("deprecation")
 public class CustomApiActivity extends AppCompatActivity {
 
     @Override
@@ -62,9 +63,8 @@ public class CustomApiActivity extends AppCompatActivity {
     private IProgressDialog mProgressDialog = new IProgressDialog() {
         @Override
         public Dialog getDialog() {
-            ProgressDialog dialog = new ProgressDialog(CustomApiActivity.this);
-            dialog.setMessage("请稍候...");
-            return dialog;
+
+            return null;
         }
     };
     

@@ -16,16 +16,20 @@
 
 package com.zhouyou.http.demo;
 
+import static androidx.core.content.ContextCompat.startActivity;
+
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
+
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -75,7 +79,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        android.support.v7.app.ActionBar actionBar = getSupportActionBar();
+        ActionBar actionBar = getSupportActionBar();
         if(actionBar != null){
             //actionBar.setHomeButtonEnabled(true);
             //actionBar.setDisplayHomeAsUpEnabled(true);
@@ -104,12 +108,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
-        switch (id) {
-            case R.id.adout_layout:
-                Intent intent = new Intent(MainActivity.this, AboutActivity.class);
-                startActivity(intent);
-                break;
-        }
+
         return super.onOptionsItemSelected(item);
     }
 
@@ -571,8 +570,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onCustomApiResult(View view) {
-        Intent intent = new Intent(this, CustomApiActivity.class);
-        startActivity(intent);
+
     }
 
     public void onListResult(View view) {
