@@ -36,7 +36,6 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.tbruyelle.rxpermissions2.RxPermissions;
 import com.zhouyou.http.EasyHttp;
 import com.zhouyou.http.callback.ProgressDialogCallBack;
 import com.zhouyou.http.demo.constant.AppConstant;
@@ -63,8 +62,7 @@ import io.reactivex.functions.Consumer;
 public class LoginActivity extends AppCompatActivity {
     private EditText mEmailView;
     private EditText mPasswordView;
-    RxPermissions rxPermissions;
-    
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -92,7 +90,6 @@ public class LoginActivity extends AppCompatActivity {
 
         mEmailView.setText("18688994275");
         mPasswordView.setText("123456");
-        rxPermissions = new RxPermissions(this);
         autoLogin();
     }
 
@@ -206,18 +203,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void getPermissions(final String name, final String pass) {
-       rxPermissions.request(Manifest.permission.READ_EXTERNAL_STORAGE,Manifest.permission.WRITE_EXTERNAL_STORAGE)
-               .subscribe(new Consumer<Boolean>() {
-                   @Override
-                   public void accept(@NonNull Boolean aBoolean) throws Exception {
-                       if(aBoolean){
-                           //Toast.makeText(LoginActivity.this, "权限获取成功", Toast.LENGTH_SHORT).show();
-                           onLogin(name, pass);
-                       }else {
-                           showMissingPermissionDialog();
-                       }
-                   }
-               });
+
     }
 
     // 显示缺失权限提示

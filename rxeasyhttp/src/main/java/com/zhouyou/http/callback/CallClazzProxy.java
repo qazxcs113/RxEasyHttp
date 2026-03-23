@@ -16,7 +16,7 @@
 
 package com.zhouyou.http.callback;
 
-import com.google.gson.internal.$Gson$Types;
+import com.google.gson.internal.GsonTypes;
 import com.zhouyou.http.model.ApiResult;
 import com.zhouyou.http.utils.Utils;
 
@@ -57,6 +57,6 @@ public abstract class CallClazzProxy<T extends ApiResult<R>, R> implements IType
         if (rawType instanceof ParameterizedType) {
             rawType = ((ParameterizedType) rawType).getRawType();
         }
-        return $Gson$Types.newParameterizedTypeWithOwner(null, rawType, typeArguments);
+        return GsonTypes.newParameterizedTypeWithOwner(null, rawType.getClass(), typeArguments);
     }
 }
